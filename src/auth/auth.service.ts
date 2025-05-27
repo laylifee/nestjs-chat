@@ -13,11 +13,26 @@ export class AuthService {
   async login(user: any) {
     const payload = { ...user };
     console.log('Login payload:', payload);
+
     if (!payload.email) {
-      throw new UnauthorizedException('Email is required for login');
+      return {
+        data: null,
+        code: 0,
+        message: 'Email is required for login',
+      };
     }
+    let userInfo = await this.userService.findByEmail(payload.email);
+    if (!userInfo) {
+      return {
+        data: null,
+        code: 0,
+        message: 'User not found',
+      };
+    }
+    console.log('Login user:', userInfo);
     return {
       access_token: this.jwtService.sign(payload),
+      userInfo: userInfo,
     };
   }
 

@@ -11,7 +11,9 @@ export class AuthController {
     let data = await this.authService.login(loginUserDto);
     console.log('Login response:', data);
     return {
-      access_token: data.access_token,
+      data: {
+        ...data,
+      },
       code: 200,
       message: 'Login successful',
     };
