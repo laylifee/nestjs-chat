@@ -81,7 +81,7 @@ export class WsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage('leaveGroup')
   handleLeaveGroup(client: Socket, payload: { groupId: number }) {
     client.leave(`group_${payload.groupId}`);
-    console.log(`用户 ${client.data.userId} 离开群组 ${payload.groupId}`);
+    // console.log(`用户 ${client.data.userId} 离开群组 ${payload.groupId}`);
   }
 
   async handleDisconnect(client: Socket) {
